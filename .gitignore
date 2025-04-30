@@ -1,0 +1,36 @@
+# Bytecode and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments (common names)
+venv/
+.env/
+.venv/
+
+# Environment/config files
+.env
+*.env
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
+
+# MacOS
+.DS_Store
+
+# Logs and dumps
+*.log
+*.pid
+
+# Testing and coverage
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+
+# Build/distribution artifacts
+build/
+dist/
+*.egg-info/
