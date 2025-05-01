@@ -1,4 +1,6 @@
-class E_Character:
+import uuid
+
+class Character:
     def __init__(self,
         is_player=False,
         name="Steve", 
@@ -14,6 +16,7 @@ class E_Character:
             "ANAM": 5,
             "LUCK": 5,}
         ):
+        self.id = uuid.uuid4()
 
         self.is_player = is_player
 
