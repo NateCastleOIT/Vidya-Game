@@ -1,8 +1,10 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame
+from PyQt5.QtWidgets import QPushButton, QLineEdit, QComboBox, QHBoxLayout, QTextEdit, QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame
 from Systems import ComponentRegistry
 from Systems import component_name_map
 import dataclasses
 from Components import Name
+
+from Systems.S_LLM_Controller import LLMController
 
 class HUD(QWidget):
     def __init__(self, registry: ComponentRegistry, entity_id):
@@ -58,6 +60,54 @@ class HUD(QWidget):
                 else:
                     layout.addWidget(QLabel(f"\t{f.name}: {val}"))
 
+class LLMHUD(QWidget):
+    def __init__(self, llm_controller: LLMController):
+        super().__init__()
+        self.llm = llm_controller
+
+        self.setWindowTitle("LLM Interface")
+        self.resize(500, 600)
+
+        layout = QVBoxLayout(self)
+        self.setLayout(layout)
+
+        # Scrollable response area
+        self.response_area = QTextEdit()
+        self.response_area.setReadOnly(True)
+        layout.addWidget(self.response_area)
+
+        # Role switch dropdown
+        role_layout = QHBoxLayout()
+        self.role_dropdown = QComboBox()
+        self.role_dropdown.addItems(["user", "gm", "player"])
+        self.role_dropdown.currentTextChanged.connect(self.change_role)
+        role_layout.addWidget(QLabel("LLM Role:"))
+        role_layout.addWidget(self.role_dropdown)
+        layout.addLayout(role_layout)
+
+        # Input box + send button
+        input_layout = QHBoxLayout()
+        self.input_box = QLineEdit()
+        self.send_button = QPushButton("Send")
+        self.send_button.clicked.connect(self.send_message)
+
+        input_layout.addWidget(self.input_box)
+        input_layout.addWidget(self.send_button)
+        layout.addLayout(input_layout)
+
+    def change_role(self, new_role):
+        self.llm.set_role(new_role)
+        self.response_area.append(f"--- Switched to role: {new_role} ---")
+
+    def send_message(self):
+        user_input = self.input_box.text().strip()
+        if not user_input:
+            return
+        self.response_area.append(f"[You]: {user_input}")
+        self.input_box.clear()
+        response = self.llm.send_message(user_input)
+        self.response_area.append(f"[LLM-{self.llm.active_role}]: {response}")
+
 class AdminView(QWidget):
     def __init__(self, registry, entity_ids):
         super().__init__()
@@ -78,6 +128,11 @@ class AdminView(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(scroll)
         self.setLayout(layout)
+
+        # Render LLM HUD
+        llm_controller = LLMController()
+        llm_hud = LLMHUD(llm_controller)
+        content_layout.addWidget(llm_hud)
 
         # Render each entity
         for eid in entity_ids:

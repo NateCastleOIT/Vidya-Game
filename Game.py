@@ -9,7 +9,8 @@ from Systems import (AdminView,
                     EntityRegistry, 
                     ComponentRegistry, 
                     EntityBuilder, 
-                    load_all_components
+                    load_all_components,
+                    LLMController,
 )
 
 # Need this to reference component types in the EntityBuilder
@@ -29,6 +30,7 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 
+    llmcontroller = LLMController()
     entity_registry = EntityRegistry()
     component_registry = ComponentRegistry()
     entity_builder = EntityBuilder(component_registry, entity_registry)
