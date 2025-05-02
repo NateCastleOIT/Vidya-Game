@@ -1,29 +1,31 @@
-from dataclasses import dataclass
-from Components.C_Base_Type import Component
+from dataclasses import dataclass, field
 
 @dataclass
-class MagicalProperties(Component):
+class MagicalProperties:
     """"""
     # Tags for conditional effects
-    is_magical: bool = False
-    is_enchanted: bool = False
-    is_cursed: bool = False
-    is_haunted: bool = False
-    is_divine: bool = False
-    is_undead: bool = False
+    conditional_effects: dict = field(default_factory=lambda: {
+        "is_magical": False,
+        "is_enchanted": False,
+        "is_cursed": False,
+        "is_haunted": False,
+        "is_divine": False,
+        "is_undead": False
+    })
 
-    has_mana: bool = False
-    mana_capacity: float = 0.0
-    mana_regeneration_rate: float = 0.0
-    mana_efficiency: float = 0.0
-    mana_resistance: float = 0.0
-    mana_conductivity: float = 0.0
-    mana_absorption: float = 0.0
-    mana_reflection: float = 0.0
-    mana_drain: float = 0.0
-
-    is_mana_conductive: bool = False
-    magic_conductivity: float = 0.0
-    magic_resistance: float = 0.0
-
+    # Magical properties
+    magical_properties: dict = field(default_factory=lambda: {
+        "has_mana": False,
+        "mana_capacity": 0.0,
+        "mana_regeneration_rate": 0.0,
+        "mana_efficiency": 0.0,
+        "mana_resistance": 0.0,
+        "mana_conductivity": 0.0,
+        "mana_absorption": 0.0,
+        "mana_reflection": 0.0,
+        "mana_drain": 0.0,
+        "is_mana_conductive": False,
+        "magic_conductivity": 0.0,
+        "magic_resistance": 0.0
+    })
     # Add more properties as needed

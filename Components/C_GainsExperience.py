@@ -1,8 +1,7 @@
 from dataclasses import dataclass
-from Components.C_Base_Type import Component
 
 @dataclass
-class GainsExperience(Component):
+class GainsExperience:
     level: int = 1
     experience: int = 0
     experience_to_next_level: int = 100

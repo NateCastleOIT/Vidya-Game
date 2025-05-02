@@ -1,8 +1,7 @@
 from dataclasses import dataclass
-from Components.C_Base_Type import Component
 
 @dataclass
-class Name(Component):
+class Name:
     """Name of the component."""
 
     # General

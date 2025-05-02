@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from Components.C_Base_Type import Component
 
 @dataclass
-class IsPlayer(Component):
+class IsPlayer:
     is_player: bool = True
     

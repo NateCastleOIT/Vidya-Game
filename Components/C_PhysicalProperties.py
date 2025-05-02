@@ -1,59 +1,70 @@
-from dataclasses import dataclass
-from Components.C_Base_Type import Component
+from dataclasses import dataclass, field
 from Enums.states_of_matter import StateOfMatter
 
 @dataclass
-class PhysicalProperties(Component):
+class PhysicalProperties:
     """Normalized physical and sensory properties (0.0 to 1.0 where applicable)."""
 
     # General & Material
-    weight: float = 10.0
-    volume: float = 1.0
-    density: float = 0.5
-    is_stackable: bool = False
-    max_stack_size: int = 1
-    is_tangible: bool = True
-    state_of_matter: str = "solid"  # solid, liquid, gas
+    general_properties: dict = field(default_factory=lambda: {
+        "weight": 10.0,
+        "volume": 1.0,
+        "density": 0.5,
+        "is_stackable": False,
+        "max_stack_size": 1,
+        "is_tangible": True,
+        "state_of_matter": "solid"  # solid, liquid, gas
+    })
 
     # Structural / Mechanical
-    hardness: float = 0.5
-    toughness: float = 0.5
-    brittleness: float = 0.5
-    elasticity: float = 0.5
-    ductility: float = 0.5
-    malleability: float = 0.5
-    tensile_strength: float = 0.5
-    compressive_strength: float = 0.5
-    shear_strength: float = 0.5
-    impact_resistance: float = 0.5
-    friction_coefficient: float = 0.5
-    is_fragile: bool = False
+    structural_properties: dict = field(default_factory=lambda: {
+        "hardness": 0.5,
+        "toughness": 0.5,
+        "brittleness": 0.5,
+        "elasticity": 0.5,
+        "ductility": 0.5,
+        "malleability": 0.5,
+        "tensile_strength": 0.5,
+        "compressive_strength": 0.5,
+        "shear_strength": 0.5,
+        "impact_resistance": 0.5,
+        "friction_coefficient": 0.5,
+        "is_fragile": False
+    })
 
     # Thermal
-    melting_point: float = 0.5
-    boiling_point: float = 0.5
-    thermal_conductivity: float = 0.5
-    specific_heat_capacity: float = 0.5
-    flash_point: float = 0.5
-    thermal_expansion: float = 0.5
-    is_flammable: bool = False
+    thermal_properties: dict = field(default_factory=lambda: {
+        "melting_point": 0.5,
+        "boiling_point": 0.5,
+        "thermal_conductivity": 0.5,
+        "specific_heat_capacity": 0.5,
+        "flash_point": 0.5,
+        "thermal_expansion": 0.5,
+        "is_flammable": False
+    })
 
     # Chemical
-    acidity: float = 0.5
-    permeability: float = 0.5
-    porosity: float = 0.5
-    is_biodegradable: bool = False
+    chemical_properties: dict = field(default_factory=lambda: {
+        "acidity": 0.5,
+        "permeability": 0.5,
+        "porosity": 0.5,
+        "is_biodegradable": False
+    })
 
     # Electromagnetic
-    is_conductive: bool = False
-    is_magnetic: bool = False
-    is_radiative: bool = False
-    reflectivity: float = 0.5
-    transparency: float = 0.0
-    luminosity: float = 0.0
+    electromagnetic_properties: dict = field(default_factory=lambda: {
+        "is_conductive": False,
+        "is_magnetic": False,
+        "is_radiative": False,
+        "reflectivity": 0.5,
+        "transparency": 0.0,
+        "luminosity": 0.0
+    })
 
     # Sensory
-    color: str = "gray"
-    texture: str = "smooth"
-    odor: str = "none"
-    taste: str = "none"
+    sensory_properties: dict = field(default_factory=lambda: {
+        "color": "gray",
+        "texture": "smooth",
+        "odor": "none",
+        "taste": "none"
+    })

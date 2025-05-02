@@ -1,12 +1,12 @@
-from dataclasses import dataclass
-from typing import Dict, Any
 from uuid import uuid4, UUID
 
-# Base component type
 class Entity:
+    def __init__(self, id: UUID = None):
+        self.id = id or uuid4()
+
     def to_dict(self) -> dict:
-        return self.__dict__
+        return {"id": str(self.id)}
 
     @classmethod
     def from_dict(cls, data: dict):
-        return cls(**data)
+        return cls(id=UUID(data["id"]))

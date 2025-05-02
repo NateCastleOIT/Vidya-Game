@@ -1,78 +1,57 @@
-from PyQt5.QtWidgets import (
-    QWidget, QLabel, QVBoxLayout, QComboBox, QApplication, QScrollArea, QFormLayout, QGroupBox
-)
-from PyQt5.QtCore import Qt
-
-from Systems.S_Entity_Registry import EntityRegistry
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame
+from Systems import ComponentRegistry
+from Systems import component_name_map
+import dataclasses
 
 class HUD(QWidget):
-    def __init__(self, entity_registry, character):
+    def __init__(self, registry: ComponentRegistry, entity_id):
         super().__init__()
+        self.registry = registry
+        self.entity_id = entity_id
 
-        character = entity_registry.get_all_components(character)
-        print(character['Name'])
-        self.setWindowTitle(f"{character['Name']}'s HUD")
-        self.setGeometry(100, 100, 400, 600)
+        self.setWindowTitle("Entity HUD")
+        self.resize(400, 600)  # Set a fixed or resizable height
 
-        scroll = QScrollArea(self)
+        # Main layout of the HUD window
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+
+        # Create scroll area
+        scroll = QScrollArea()
         scroll.setWidgetResizable(True)
 
-        widget = QWidget()
-        layout = QVBoxLayout(widget)
+        # Container inside scroll area
+        scroll_content = QFrame()
+        scroll_layout = QVBoxLayout(scroll_content)
 
-        # --- Basic Stats Section ---
-        basic_stats_box = QGroupBox("Basic Info")
-        basic_layout = QFormLayout()
+        # Attach to HUD
+        scroll.setWidget(scroll_content)
+        self.layout.addWidget(scroll)
 
-        self.labels = {}
-        integer_fields = {
-            "CoreStats": [
-                'STNG', 'VIGR', 'ENDR', 'DEXT', 'WILL',
-                'INTL', 'CHAR', 'MANA', 'ANAM', 'LUCK'
-            ],
-            "OtherStats": [
-                'level', 'experience', 'health_points', 'mana_points',
-                'action_points', 'movement_speed', 'physical_defense', 'mental_defense'
-            ]
-        }
+        # Render everything into scroll layout
+        self.render_components(scroll_layout)
 
-        for comp_name, fields in integer_fields.items():
-            comp = character.get(comp_name)
-            if comp:
-                for field in fields:
-                    value = comp.get(field, "N/A")
-                    label = QLabel(str(value))
-                    basic_layout.addRow(f"{field.replace('_', ' ').title()}:", label)
-                    self.labels[field] = label
+    def render_components(self, layout):
+        components = self.registry.get_all_components_of_entity(self.entity_id)
 
+        for comp_cls, comp_data in components.items():
+            layout.addWidget(QLabel(f"<b>{comp_cls.__name__}</b>"))
 
-        basic_stats_box.setLayout(basic_layout)
-        layout.addWidget(basic_stats_box)
+            for f in dataclasses.fields(comp_data):
+                val = getattr(comp_data, f.name)
+                meta = f.metadata
 
-        # --- Dictionaries as Dropdowns ---
-        #self.add_dropdown(layout, "Skills", character["CoreStats"]["skills"])
-        self.add_dropdown(layout, "Moves", character["Moves"])
-        self.add_dropdown(layout, "Attributes", character["Attributes"])
-        self.add_dropdown(layout, "Status Effects", character["StatusEffects"])
+                if meta.get("ui") == "dropdown":
+                    dropdown = QComboBox()
+                    dropdown.addItems(meta["options"])
+                    dropdown.setCurrentText(val)
+                    dropdown.setEnabled(False)  # Optional: make it read-only for now
+                    layout.addWidget(dropdown)
 
-        scroll.setWidget(widget)
+                elif isinstance(val, dict):
+                    for k, v in val.items():
+                        layout.addWidget(QLabel(f"\t{f.name}.{k}: {v}"))
 
-        main_layout = QVBoxLayout(self)
-        main_layout.addWidget(scroll)
-        self.setLayout(main_layout)
+                else:
+                    layout.addWidget(QLabel(f"\t{f.name}: {val}"))
 
-    def add_dropdown(self, layout, title, data_dict):
-        group_box = QGroupBox(title)
-        group_layout = QVBoxLayout()
-
-        combo = QComboBox()
-        for key, value in data_dict.items():
-            combo.addItem(f"{key}: {value}")
-
-        group_layout.addWidget(combo)
-        group_box.setLayout(group_layout)
-        layout.addWidget(group_box)
-
-    def update_stat(self, field, value):
-        if field in self.labels:
-            self.labels[field].setText(str(value))
