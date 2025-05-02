@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame
 from Systems import ComponentRegistry
 from Systems import component_name_map
 import dataclasses
+from Components import Name
 
 class HUD(QWidget):
     def __init__(self, registry: ComponentRegistry, entity_id):
@@ -9,7 +10,9 @@ class HUD(QWidget):
         self.registry = registry
         self.entity_id = entity_id
 
-        self.setWindowTitle("Entity HUD")
+        entity_name = self.registry.get_component_of_entity(Name, self.entity_id).name
+
+        self.setWindowTitle(entity_name + "'s HUD")
         self.resize(400, 600)  # Set a fixed or resizable height
 
         # Main layout of the HUD window
@@ -55,3 +58,28 @@ class HUD(QWidget):
                 else:
                     layout.addWidget(QLabel(f"\t{f.name}: {val}"))
 
+class AdminView(QWidget):
+    def __init__(self, registry, entity_ids):
+        super().__init__()
+
+        self.setWindowTitle("Entities HUD")
+        self.resize(600, 800)
+
+        # Scroll setup
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+
+        content = QFrame()
+        content_layout = QVBoxLayout()
+        content.setLayout(content_layout)
+
+        scroll.setWidget(content)
+
+        layout = QVBoxLayout()
+        layout.addWidget(scroll)
+        self.setLayout(layout)
+
+        # Render each entity
+        for eid in entity_ids:
+            subhud = HUD(registry, eid)
+            content_layout.addWidget(subhud)

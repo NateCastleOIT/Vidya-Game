@@ -2,7 +2,7 @@ import os
 import importlib.util
 import inspect
 
-def generate_component_init(components_dir: str = "components"):
+def generate_components_init(components_dir: str = "components"):
     init_path = os.path.join(components_dir, "__init__.py")
     imports = []
 

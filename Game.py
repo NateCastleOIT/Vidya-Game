@@ -1,13 +1,16 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 import sys
 
-from Utils.generate_components_init import generate_component_init
+from Utils import generate_components_init
 
-from Systems import ComponentRegistry
-from Systems import EntityBuilder
-from Systems import load_all_components
 from Enums import EquipmentSlot
-from Entities.E_Player_HUD import HUD
+
+from Systems import (AdminView,
+                    EntityRegistry, 
+                    ComponentRegistry, 
+                    EntityBuilder, 
+                    load_all_components
+)
 
 # Need this to reference component types in the EntityBuilder
 from Components import (
@@ -16,7 +19,7 @@ from Components import (
 
 def generate_comp_init():
     # Load all components
-    generate_component_init()
+    generate_components_init()
     
 
 if __name__ == "__main__":
@@ -26,12 +29,13 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 
+    entity_registry = EntityRegistry()
     component_registry = ComponentRegistry()
-    entity_builder = EntityBuilder(component_registry)
+    entity_builder = EntityBuilder(component_registry, entity_registry)
     load_all_components()
 
     # Create a character entity
-    hero = (
+    character = (
         entity_builder
         .with_component(IsPlayer, is_player=True)
         .with_component(Name, name="Arkyn")
@@ -74,8 +78,41 @@ if __name__ == "__main__":
         .build()
     )
 
+    blob = (
+        entity_builder
+        .with_component(IsPlayer, is_player=False)
+        .with_component(Name, name="blob")
+        .with_component(CoreStats, STNG=5)
+        .with_component(Inventory, inventory=[])
+        .with_component(EquipmentSlots, slots={
+                                            EquipmentSlot.HEAD: None,
+                                            EquipmentSlot.MAIN_HAND: None,
+                                            EquipmentSlot.OFF_HAND: None,
+
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: None,
+                                        })
+        .with_component(GainsExperience, level=1, experience=0)
+        .with_component(Moves, moves = {"Fireball": 1, "Ice Spike": 1})
+        .with_component(Actions)
+        .with_component(Attributes)
+        .with_component(StatusEffects)
+        .with_component(PhysicalProperties)
+        .build()
+    )
+
+
+
     # Create a HUD instance
-    hud = HUD(component_registry, hero)
-    hud.show()
+    admin_view = AdminView(component_registry, entity_registry.registry)
+    admin_view.show()
 
     sys.exit(app.exec_())

@@ -1,14 +1,28 @@
 from Entities.E_Base_Entity import Entity
 
 class EntityBuilder:
-    def __init__(self, registry):
-        self.registry = registry
-        self.entity_id = Entity().id
+    def __init__(self, c_registry, e_registry):
+        self.c_registry = c_registry
+        self.e_registry = e_registry
+        self.components = []
 
     def with_component(self, component_cls, **kwargs):
         instance = component_cls(**kwargs)
-        self.registry.add(self.entity_id, instance)
+        self.components.append((component_cls, instance))
         return self
 
     def build(self):
-        return self.entity_id
+        entity = Entity()
+        entity_id = entity.id
+
+        # Register the entity
+        self.e_registry.register(entity_id)
+
+        # Register all components
+        for comp_cls, instance in self.components:
+            self.c_registry.add(entity_id, instance)
+
+        # Clear builder state (optional, in case reused)
+        self.components.clear()
+
+        return entity_id
