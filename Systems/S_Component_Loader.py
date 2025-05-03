@@ -3,7 +3,7 @@ import inspect
 import os
 from pathlib import Path
 
-from Components.C_Base_Type import Component
+from Components.C_BaseType import Component
 
 component_registry = {} # Maps component classes to their instances
 component_name_map = {}  # Maps component class names to their respective classes

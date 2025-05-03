@@ -27,3 +27,9 @@ class ComponentRegistry:
 
     def entities_with_component(self, component_cls):
         return list(self.get(component_cls).keys())
+
+    def get_component_class_by_name(self, name):
+        for comp_cls in self.registry.keys():
+            if comp_cls.__name__ == name:
+                return comp_cls
+        raise ValueError(f"Component class with name {name} not found.")

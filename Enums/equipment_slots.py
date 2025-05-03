@@ -1,18 +1,18 @@
-from enum import Enum
+from enum import Enum, auto
 
 class EquipmentSlot(Enum):
-    HEAD = "head"
-    CHEST = "chest"
-    LEGS = "legs"
-    FOOT = "foot"
-    HAND = "hand"
-    WAIST = "waist"
-    ARM = "arm"
-    NECK = "neck"
-    FINGER = "finger"
-    BACK = "back"
-    MAIN_HAND = "main_hand"
-    OFF_HAND = "off_hand"
-    APPENDAGE = "appendage"
-    PIERCING = "piercing"
-    SHIELD = "shield"
+    HEAD = auto()
+    CHEST = auto()
+    LEG = auto()
+    FOOT = auto()
+    HAND = auto()
+    WAIST = auto()
+    ARM = auto()
+    NECK = auto()
+    FINGER = auto()
+    BACK = auto()
+    MAIN_HAND = auto()
+    OFF_HAND = auto()
+    APPENDAGE = auto()
+    PIERCING = auto()
+    SHIELD = auto()

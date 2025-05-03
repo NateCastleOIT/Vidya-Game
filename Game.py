@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 import sys
 
-from Utils import generate_components_init
+from Utils import generate_directory_inits
 
 from Enums import EquipmentSlot
 
@@ -11,6 +11,7 @@ from Systems import (AdminView,
                     EntityBuilder, 
                     load_all_components,
                     LLMController,
+                    entity_to_dict,
 )
 
 # Need this to reference component types in the EntityBuilder
@@ -18,15 +19,14 @@ from Components import (
     IsPlayer, Name, CoreStats, Inventory, EquipmentSlots, GainsExperience, Moves, Actions, Attributes, StatusEffects, PhysicalProperties, MagicalProperties
 )
 
-def generate_comp_init():
-    # Load all components
-    generate_components_init()
+def generate_inits():
+    # Load all entities, components, systems
+    generate_directory_inits()
     
 
 if __name__ == "__main__":
     # Initialize game
-    generate_comp_init()
-
+    generate_inits()
 
     app = QApplication(sys.argv)
 
@@ -48,27 +48,15 @@ if __name__ == "__main__":
                                             EquipmentSlot.NECK: None,
                                             EquipmentSlot.CHEST: None,
                                             EquipmentSlot.BACK: None,
-                                            EquipmentSlot.ARM: None,
-                                            EquipmentSlot.ARM: None,
+                                            EquipmentSlot.ARM: [None] * 2,
                                             EquipmentSlot.WAIST: None,
-                                            EquipmentSlot.LEGS: None,
+                                            EquipmentSlot.LEG: None,
                                             EquipmentSlot.HAND: None,
                                             EquipmentSlot.HAND: None,
-                                            EquipmentSlot.FOOT: None,
-                                            EquipmentSlot.FOOT: None,
+                                            EquipmentSlot.FOOT: [None] * 2,
                                             EquipmentSlot.MAIN_HAND: None,
                                             EquipmentSlot.OFF_HAND: None,
-
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
-                                            EquipmentSlot.FINGER: None,
+                                            EquipmentSlot.FINGER: [None] * 10,
                                         })
         .with_component(GainsExperience, level=1, experience=0)
         .with_component(Moves, moves = {"Fireball": 1, "Ice Spike": 1})
@@ -111,10 +99,13 @@ if __name__ == "__main__":
         .build()
     )
 
-
+    dict_of_entity = entity_to_dict(character, component_registry)
+    
+    # rebuild the entity from the dict
+    entity_id = entity_builder.build_entity_from_dict(dict_of_entity)
 
     # Create a HUD instance
-    admin_view = AdminView(component_registry, entity_registry.registry)
+    admin_view = AdminView(component_registry, entity_registry)
     admin_view.show()
 
     sys.exit(app.exec_())

@@ -1,1 +1,1 @@
-from .U_generate_components_init import generate_components_init
+from .U_generate_directory_inits import generate_directory_inits

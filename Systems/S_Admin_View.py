@@ -1,18 +1,19 @@
 from PyQt5.QtWidgets import QPushButton, QLineEdit, QComboBox, QHBoxLayout, QTextEdit, QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame
-from Systems import ComponentRegistry
-from Systems import component_name_map
+
+
 import dataclasses
 from Components import Name
 
 from Systems.S_LLM_Controller import LLMController
+from Systems.S_Component_Registry import ComponentRegistry
 
 class HUD(QWidget):
-    def __init__(self, registry: ComponentRegistry, entity_id):
+    def __init__(self, c_registry: ComponentRegistry, entity_id):
         super().__init__()
-        self.registry = registry
+        self.c_registry = c_registry
         self.entity_id = entity_id
 
-        entity_name = self.registry.get_component_of_entity(Name, self.entity_id).name
+        entity_name = self.c_registry.get_component_of_entity(Name, self.entity_id).name
 
         self.setWindowTitle(entity_name + "'s HUD")
         self.resize(400, 600)  # Set a fixed or resizable height
@@ -37,7 +38,7 @@ class HUD(QWidget):
         self.render_components(scroll_layout)
 
     def render_components(self, layout):
-        components = self.registry.get_all_components_of_entity(self.entity_id)
+        components = self.c_registry.get_all_components_of_entity(self.entity_id)
 
         for comp_cls, comp_data in components.items():
             layout.addWidget(QLabel(f"<b>{comp_cls.__name__}</b>"))
@@ -109,7 +110,7 @@ class LLMHUD(QWidget):
         self.response_area.append(f"[LLM-{self.llm.active_role}]: {response}")
 
 class AdminView(QWidget):
-    def __init__(self, registry, entity_ids):
+    def __init__(self, c_registry, e_registry):
         super().__init__()
 
         self.setWindowTitle("Entities HUD")
@@ -135,6 +136,6 @@ class AdminView(QWidget):
         content_layout.addWidget(llm_hud)
 
         # Render each entity
-        for eid in entity_ids:
-            subhud = HUD(registry, eid)
+        for eid in e_registry.registry:
+            subhud = HUD(c_registry, eid)
             content_layout.addWidget(subhud)
