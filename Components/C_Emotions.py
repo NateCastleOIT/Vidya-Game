@@ -9,15 +9,3 @@ class Emotions:
     comfort_fear: float = 0.5
     pride_shame: float = 0.5
     trauma_events: Dict[str, float] = None
-
-    @property
-    def trauma(self) -> float:
-        """
-        Calculates the initiative based on the Dexterity and Luck attributes.
-        
-        Returns:
-            int: The initiative value.
-        """
-        return self.happy + self.sad
-
-    
