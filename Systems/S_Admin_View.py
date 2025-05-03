@@ -13,7 +13,7 @@ class HUD(QWidget):
         self.c_registry = c_registry
         self.entity_id = entity_id
 
-        entity_name = self.c_registry.get_component_of_entity(Name, self.entity_id).name
+        entity_name = str(self.c_registry.get_component_of_entity(Name, self.entity_id).name)
 
         self.setWindowTitle(entity_name + "'s HUD")
         self.resize(400, 600)  # Set a fixed or resizable height

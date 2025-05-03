@@ -12,6 +12,7 @@ from Systems import (AdminView,
                     load_all_components,
                     LLMController,
                     entity_to_dict,
+                    entity_to_schema,
 )
 
 # Need this to reference component types in the EntityBuilder
@@ -100,9 +101,11 @@ if __name__ == "__main__":
     )
 
     dict_of_entity = entity_to_dict(character, component_registry)
+    schema_of_entity = entity_to_schema(character, component_registry)
     
     # rebuild the entity from the dict
     entity_id = entity_builder.build_entity_from_dict(dict_of_entity) # returns a dict with types, not values for generating GPT Schema
+    entity_id = entity_builder.build_entity_from_dict(schema_of_entity) # returns a dict with types, not values for generating GPT Schema
 
     # Create a HUD instance
     admin_view = AdminView(component_registry, entity_registry)

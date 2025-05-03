@@ -7,3 +7,4 @@ from .S_Entity_Registry import EntityRegistry
 from .S_LLM_Controller import LLMController
 from .S_Component_Loader import load_all_components
 from .S_Entity_To_JSON import entity_to_dict
+from .S_Entity_To_JSON import entity_to_schema 

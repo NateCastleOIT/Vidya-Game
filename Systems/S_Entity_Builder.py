@@ -14,7 +14,7 @@ class EntityBuilder:
         self.e_registry.register(entity_id)
 
         # Register all components from the dictionary
-        for comp_cls_name, comp_kwargs in entity_dict.items():
+        for comp_cls_name, comp_kwargs in entity_dict["components"].items():
             comp_cls = self.c_registry.get_component_class_by_name(comp_cls_name)
             instance = comp_cls(**comp_kwargs)
             self.c_registry.add(entity_id, instance)
