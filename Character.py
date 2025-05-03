@@ -14,8 +14,11 @@ class Character:
             "CHAR": 5,
             "MANA": 5,
             "ANAM": 5,
-            "LUCK": 5,}
+            "LUCK": 5,
+        }
         ):
+
+
         self.id = uuid.uuid4()
 
         self.is_player = is_player

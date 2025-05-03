@@ -4,6 +4,7 @@ from .C_Attributes import Attributes
 from .C_BaseType import Component
 from .C_CoreStats import CoreStats
 from .C_Description import Description
+from .C_Emotions import Emotions
 from .C_EquipmentSlots import EquipmentSlots
 from .C_GainsExperience import GainsExperience
 from .C_Inventory import Inventory

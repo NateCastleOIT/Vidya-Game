@@ -21,22 +21,9 @@ def extract_dict_values(instance, field):
     value = getattr(instance, field.name)
     return value  # actual stored values
 
-
 #=============================================================================
 
-# def component_class_to_schema(cls_instance):
-#     if not is_dataclass(cls_instance):
-#         return {}
-
-#     result = {}
-#     for field in fields(cls_instance):
-#         if field.type in [dict, Dict]:
-#             result[field.name] = extract_dict_schema(field)
-#         else:
-#             result[field.name] = field.type.__name__
-#     return result
-
-def component_class_to_schema(cls_instance):
+def component_class_to_schema(cls_instance) -> dict:
     if not is_dataclass(cls_instance):
         return {}
 
@@ -45,7 +32,7 @@ def component_class_to_schema(cls_instance):
         result[field.name] = extract_dict_schema(cls_instance, field)
     return result
 
-def component_class_to_dict(cls_instance):
+def component_class_to_dict(cls_instance) -> dict:
     if not is_dataclass(cls_instance):
         return {}
 
@@ -56,7 +43,7 @@ def component_class_to_dict(cls_instance):
 
 #=============================================================================
     
-def entity_to_schema(entity_id: UUID, component_registry: ComponentRegistry):
+def entity_to_schema(entity_id: UUID, component_registry: ComponentRegistry) -> dict:
     entity_components = component_registry.get_all_components_of_entity(entity_id)
     components_dict = {}
     for component_cls, instance in entity_components.items():
@@ -67,7 +54,7 @@ def entity_to_schema(entity_id: UUID, component_registry: ComponentRegistry):
         "components": components_dict
     }
 
-def entity_to_dict(entity_id: UUID, component_registry: ComponentRegistry):
+def entity_to_dict(entity_id: UUID, component_registry: ComponentRegistry) -> dict:
 
     entity_components = component_registry.get_all_components_of_entity(entity_id)
 

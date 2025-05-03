@@ -54,9 +54,9 @@ class HUD(QWidget):
                     dropdown.setEnabled(False)  # Optional: make it read-only for now
                     layout.addWidget(dropdown)
 
-                elif isinstance(val, dict):
-                    for k, v in val.items():
-                        layout.addWidget(QLabel(f"\t{f.name}.{k}: {v}"))
+                # elif isinstance(val, dict):
+                #     for k, v in val.items():
+                #         layout.addWidget(QLabel(f"\t{f.name}.{k}: {v}"))
 
                 else:
                     layout.addWidget(QLabel(f"\t{f.name}: {val}"))

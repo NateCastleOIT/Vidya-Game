@@ -5,7 +5,7 @@ from Utils import generate_directory_inits
 
 from Enums import EquipmentSlot
 
-from Systems import (AdminView,
+from Systems import (AdminView,     # Systems.S_AdminView.AdminView
                     EntityRegistry, 
                     ComponentRegistry, 
                     EntityBuilder, 
@@ -17,7 +17,7 @@ from Systems import (AdminView,
 
 # Need this to reference component types in the EntityBuilder
 from Components import (
-    IsPlayer, Name, CoreStats, Inventory, EquipmentSlots, GainsExperience, Moves, Actions, Attributes, StatusEffects, PhysicalProperties, MagicalProperties
+    IsPlayer, Name, CoreStats, Inventory, EquipmentSlots, GainsExperience, Moves, Actions, Attributes, StatusEffects, PhysicalProperties, MagicalProperties, Movement
 )
 
 def generate_inits():
@@ -36,6 +36,7 @@ if __name__ == "__main__":
     component_registry = ComponentRegistry()
     entity_builder = EntityBuilder(component_registry, entity_registry)
     load_all_components()
+
 
     # Create a character entity
     character = (
@@ -66,6 +67,7 @@ if __name__ == "__main__":
         .with_component(StatusEffects)
         .with_component(PhysicalProperties)
         .with_component(MagicalProperties)
+        .with_component(Movement, speed=69.0)
         .build()
     )
 
