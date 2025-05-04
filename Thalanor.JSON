@@ -1,0 +1,127 @@
+{
+    "Name": {
+      "name": "Thalanor Ironstep"
+    },
+    "Description": {
+      "description": "Once a battle-hardened warrior, now a limping blacksmith who recounts tales of glory and a cursed arrow that ended his adventuring days."
+    },
+    "CoreStats": {
+      "STNG": 6,
+      "VIGR": 3,
+      "ENDR": 4,
+      "DEXT": 2,
+      "WILL": 7,
+      "INTL": 5,
+      "CHAR": 6,
+      "MANA": 0,
+      "ANAM": 1,
+      "LUCK": 2,
+      "available_points": 0,
+      "armor_rating": 12
+    },
+    "EquipmentSlots": {
+      "slots": {
+        "CHEST": "fd4e5c20-12a3-41a2-9175-e4dfe58b52df",
+        "LEG": "1b9e8280-bd0b-4996-a51e-cf7fcd7b1f8d",
+        "MAIN_HAND": "27ad9482-24ec-499e-a61f-23f580d6ff56",
+        "OFF_HAND": null
+      }
+    },
+    "Inventory": {
+      "inventory": {
+        "Worn Iron Greaves": {
+          "durability": 12,
+          "weight": 6.0
+        },
+        "Hammer of the Forge": {
+          "uses_left": 28,
+          "quality": "standard"
+        }
+      }
+    },
+    "PhysicalProperties": {
+      "general_properties": {
+        "weight": 95.0,
+        "volume": 1.8,
+        "density": 0.6,
+        "is_stackable": false,
+        "max_stack_size": 1,
+        "is_tangible": true,
+        "state_of_matter": "solid"
+      },
+      "structural_properties": {
+        "hardness": 0.5,
+        "toughness": 0.4,
+        "brittleness": 0.3,
+        "elasticity": 0.2,
+        "ductility": 0.1,
+        "malleability": 0.3,
+        "tensile_strength": 0.3,
+        "compressive_strength": 0.6,
+        "shear_strength": 0.4,
+        "impact_resistance": 0.2,
+        "friction_coefficient": 0.4,
+        "is_fragile": false
+      },
+      "thermal_properties": {
+        "melting_point": 0.6,
+        "boiling_point": 0.8,
+        "thermal_conductivity": 0.5,
+        "specific_heat_capacity": 0.4,
+        "flash_point": 0.1,
+        "thermal_expansion": 0.2,
+        "is_flammable": false
+      },
+      "chemical_properties": {
+        "acidity": 0.1,
+        "permeability": 0.2,
+        "porosity": 0.3,
+        "is_biodegradable": false
+      },
+      "electromagnetic_properties": {
+        "is_conductive": false,
+        "is_magnetic": false,
+        "is_radiative": false,
+        "reflectivity": 0.2,
+        "transparency": 0.0,
+        "luminosity": 0.0
+      },
+      "sensory_properties": {
+        "color": "gray",
+        "texture": "rough",
+        "odor": "smoky",
+        "taste": "none"
+      }
+    },
+    "GainsExperience": {
+      "level": 12,
+      "experience": 42000,
+      "experience_to_next_level": 0,
+      "is_level_locked": true,
+      "level_lock": 12,
+      "experience_multiplier": 0.0
+    },
+    "StatusEffects": {
+      "effects": {
+        "Chronic Injury - Left Knee": {
+          "type": "permanent",
+          "impact": "reduces speed and dodge chance",
+          "applied_on": "old wound"
+        }
+      }
+    },
+    "Movement": {
+      "speed": 2
+    },
+    "Emotions": {
+      "happy_sad": 0.3,
+      "enjoyment_disgust": 0.4,
+      "love_hate": 0.6,
+      "comfort_fear": 0.7,
+      "pride_shame": 0.8,
+      "trauma_events": {
+        "The Arrow Incident": "Struck in the knee by a cursed arrow. Ended adventuring career."
+      }
+    }
+  }
+  

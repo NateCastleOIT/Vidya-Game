@@ -3,6 +3,6 @@ from Enums.equipment_slots import EquipmentSlot
 
 @dataclass
 class IsEquipable:
-    slot_type: EquipmentSlot  # The slot this item is meant to go in
+    slot_type: EquipmentSlot = None  # The slot this item is meant to go in
     requires_both_hands: bool = False
     weight_penalty: float = 0.0

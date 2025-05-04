@@ -6,4 +6,4 @@ from Enums.equipment_slots import EquipmentSlot
 @dataclass
 class EquipmentSlots:
     # The list of equipment slots for the entity (uuid)
-    slots: Dict[EquipmentSlot, UUID]
+    slots: Dict[EquipmentSlot, UUID] = None

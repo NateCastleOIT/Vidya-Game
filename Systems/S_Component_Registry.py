@@ -1,6 +1,7 @@
 class ComponentRegistry:
     def __init__(self):
         self.registry = {}  # {ComponentClass.__name__: {uuid: instance}}
+        self.all_components = {}  # {ComponentClass.__name__: ComponentClass}
 
     def register(self, component_cls):
         if component_cls not in self.registry:
@@ -11,6 +12,12 @@ class ComponentRegistry:
         if component_cls not in self.registry:
             self.register(component_cls)
         self.registry[component_cls][entity_id] = component_instance
+
+    def add_to_all(self, component_instance):
+        component_cls = type(component_instance)
+        if component_cls not in self.all_components:
+            self.all_components[component_cls] = component_cls
+
 
     def get(self, component_cls):
         return self.registry.get(component_cls, {})
@@ -29,7 +36,7 @@ class ComponentRegistry:
         return list(self.get(component_cls).keys())
 
     def get_component_class_by_name(self, name):
-        for comp_cls in self.registry.keys():
+        for comp_cls in self.all_components.keys():
             if comp_cls.__name__ == name:
                 return comp_cls
         raise ValueError(f"Component class with name {name} not found.")

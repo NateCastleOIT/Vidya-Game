@@ -1,0 +1,120 @@
+{
+    "Name": {
+      "name": "Lord Veydras"
+    },
+    "Description": {
+      "description": "A once-brilliant arcanist who delved too deeply into the fabric of magical architecture, Veydras is now a hollowed intellect twisted by forbidden resonance and impossible geometry."
+    },
+    "CoreStats": {
+      "STNG": 3,
+      "VIGR": 4,
+      "ENDR": 6,
+      "DEXT": 5,
+      "WILL": 10,
+      "INTL": 12,
+      "CHAR": 8,
+      "MANA": 15,
+      "ANAM": 9,
+      "LUCK": 2,
+      "available_points": 0,
+      "armor_rating": 18
+    },
+    "MagicalProperties": {
+      "conditional_effects": {
+        "is_magical": true,
+        "is_enchanted": true,
+        "is_cursed": true,
+        "is_haunted": false,
+        "is_divine": false,
+        "is_undead": false
+      },
+      "magical_properties": {
+        "has_mana": true,
+        "mana_capacity": 120.0,
+        "mana_regeneration_rate": 3.5,
+        "mana_efficiency": 0.85,
+        "mana_resistance": 0.4,
+        "mana_conductivity": 0.7,
+        "mana_absorption": 0.1,
+        "mana_reflection": 0.5,
+        "mana_drain": 0.25,
+        "is_mana_conductive": true,
+        "magic_conductivity": 0.8,
+        "magic_resistance": 0.3
+      }
+    },
+    "Moves": {
+      "moves": {
+        "Phase Shift": true,
+        "Reality Spike": true,
+        "Mind Burn": true,
+        "Warpstep": true
+      }
+    },
+    "Attributes": {
+      "attributes": {
+        "affiliation": "Fractured Order",
+        "title": "Architect of the Broken Eye",
+        "legacy_trait": "Resonant Mind"
+      }
+    },
+    "Actions": {
+      "actions": {
+        "Cast Warp Rune": "Warpstep",
+        "Unleash Madness": "Mind Burn"
+      }
+    },
+    "StatusEffects": {
+      "effects": {
+        "Resonance Feedback": {
+          "type": "temporal",
+          "impact": "random memory loss and magical surges",
+          "applied_on": "dimensional misstep"
+        },
+        "Tethered Echo": {
+          "type": "cognitive",
+          "impact": "generates illusions that sometimes act independently",
+          "applied_on": "permanent"
+        }
+      }
+    },
+    "PhysicalProperties": {
+      "general_properties": {
+        "weight": 70.0,
+        "volume": 1.6,
+        "density": 0.4,
+        "is_stackable": false,
+        "max_stack_size": 1,
+        "is_tangible": true,
+        "state_of_matter": "solid"
+      },
+      "sensory_properties": {
+        "color": "ashen",
+        "texture": "fractured",
+        "odor": "ozone",
+        "taste": "bitter"
+      },
+      "electromagnetic_properties": {
+        "is_conductive": true,
+        "is_magnetic": false,
+        "is_radiative": true,
+        "reflectivity": 0.1,
+        "transparency": 0.0,
+        "luminosity": 0.3
+      }
+    },
+    "Movement": {
+      "speed": 6
+    },
+    "Emotions": {
+      "happy_sad": 0.1,
+      "enjoyment_disgust": 0.9,
+      "love_hate": 0.95,
+      "comfort_fear": 0.2,
+      "pride_shame": 0.9,
+      "trauma_events": {
+        "Riftfall Ritual": "Overchanneled a planar lattice — now permanently bound to non-Euclidean resonance nodes."
+      }
+    }
+  }
+  

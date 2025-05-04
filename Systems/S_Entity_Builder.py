@@ -10,6 +10,11 @@ class EntityBuilder:
         entity = Entity()
         entity_id = entity.id
 
+        entity_dict = {
+            "entity_id": str(entity_id),
+            "components": entity_dict
+        }
+
         # Register the entity
         self.e_registry.register(entity_id)
 

@@ -13,7 +13,7 @@ class PhysicalProperties:
         "is_stackable": False,
         "max_stack_size": 1,
         "is_tangible": True,
-        "state_of_matter": "solid"  # solid, liquid, gas
+        "state_of_matter": StateOfMatter.SOLID  # solid, liquid, gas
     })
 
     # Structural / Mechanical

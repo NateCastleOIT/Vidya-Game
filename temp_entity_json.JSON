@@ -1,0 +1,165 @@
+{
+  "entity_id": "b6f2334d-636a-4233-ba6c-905893324dcf",
+  "components": {
+    "IsPlayer": {
+      "is_player": true
+    },
+    "Name": {
+      "name": "Arkyn"
+    },
+    "CoreStats": {
+      "STNG": 5,
+      "VIGR": 5,
+      "ENDR": 5,
+      "DEXT": 5,
+      "WILL": 5,
+      "INTL": 5,
+      "CHAR": 5,
+      "MANA": 5,
+      "ANAM": 5,
+      "LUCK": 5,
+      "available_points": 0,
+      "armor_rating": 0
+    },
+    "Inventory": {
+      "inventory": []
+    },
+    "EquipmentSlots": {
+      "slots": {
+        "EquipmentSlot.HEAD": null,
+        "EquipmentSlot.NECK": null,
+        "EquipmentSlot.CHEST": null,
+        "EquipmentSlot.BACK": null,
+        "EquipmentSlot.ARM": [
+          null,
+          null
+        ],
+        "EquipmentSlot.WAIST": null,
+        "EquipmentSlot.LEG": null,
+        "EquipmentSlot.HAND": null,
+        "EquipmentSlot.FOOT": [
+          null,
+          null
+        ],
+        "EquipmentSlot.MAIN_HAND": null,
+        "EquipmentSlot.OFF_HAND": null,
+        "EquipmentSlot.FINGER": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "GainsExperience": {
+      "level": 1,
+      "experience": 0,
+      "experience_to_next_level": 100,
+      "is_level_locked": false,
+      "level_lock": -1,
+      "experience_multiplier": 1.0
+    },
+    "Moves": {
+      "moves": {
+        "Fireball": 1,
+        "Ice Spike": 1
+      }
+    },
+    "Actions": {
+      "actions": null
+    },
+    "Attributes": {
+      "attributes": null
+    },
+    "StatusEffects": {
+      "effects": null
+    },
+    "PhysicalProperties": {
+      "general_properties": {
+        "weight": 10.0,
+        "volume": 1.0,
+        "density": 0.5,
+        "is_stackable": false,
+        "max_stack_size": 1,
+        "is_tangible": true,
+        "state_of_matter": "solid"
+      },
+      "structural_properties": {
+        "hardness": 0.5,
+        "toughness": 0.5,
+        "brittleness": 0.5,
+        "elasticity": 0.5,
+        "ductility": 0.5,
+        "malleability": 0.5,
+        "tensile_strength": 0.5,
+        "compressive_strength": 0.5,
+        "shear_strength": 0.5,
+        "impact_resistance": 0.5,
+        "friction_coefficient": 0.5,
+        "is_fragile": false
+      },
+      "thermal_properties": {
+        "melting_point": 0.5,
+        "boiling_point": 0.5,
+        "thermal_conductivity": 0.5,
+        "specific_heat_capacity": 0.5,
+        "flash_point": 0.5,
+        "thermal_expansion": 0.5,
+        "is_flammable": false
+      },
+      "chemical_properties": {
+        "acidity": 0.5,
+        "permeability": 0.5,
+        "porosity": 0.5,
+        "is_biodegradable": false
+      },
+      "electromagnetic_properties": {
+        "is_conductive": false,
+        "is_magnetic": false,
+        "is_radiative": false,
+        "reflectivity": 0.5,
+        "transparency": 0.0,
+        "luminosity": 0.0
+      },
+      "sensory_properties": {
+        "color": "gray",
+        "texture": "smooth",
+        "odor": "none",
+        "taste": "none"
+      }
+    },
+    "MagicalProperties": {
+      "conditional_effects": {
+        "is_magical": false,
+        "is_enchanted": false,
+        "is_cursed": false,
+        "is_haunted": false,
+        "is_divine": false,
+        "is_undead": false
+      },
+      "magical_properties": {
+        "has_mana": false,
+        "mana_capacity": 0.0,
+        "mana_regeneration_rate": 0.0,
+        "mana_efficiency": 0.0,
+        "mana_resistance": 0.0,
+        "mana_conductivity": 0.0,
+        "mana_absorption": 0.0,
+        "mana_reflection": 0.0,
+        "mana_drain": 0.0,
+        "is_mana_conductive": false,
+        "magic_conductivity": 0.0,
+        "magic_resistance": 0.0
+      }
+    },
+    "Movement": {
+      "speed": 69.0
+    }
+  }
+}

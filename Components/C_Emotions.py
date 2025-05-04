@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict
 
 @dataclass
@@ -8,4 +8,4 @@ class Emotions:
     love_hate: float = 0.5
     comfort_fear: float = 0.5
     pride_shame: float = 0.5
-    trauma_events: Dict[str, float] = None
+    trauma_events: Dict[str, str] = None

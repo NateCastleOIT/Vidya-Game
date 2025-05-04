@@ -1,7 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict
 
 @dataclass
 class Attributes:
-    attributes: Dict[str, bool] = None
+    attributes: Dict[str, str] = None
     
