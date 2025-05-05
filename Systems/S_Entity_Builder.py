@@ -1,4 +1,7 @@
 from Entities.E_BaseEntity import Entity
+from pathlib import Path
+import os
+import json
 
 class EntityBuilder:
     def __init__(self, c_registry, e_registry):
@@ -46,3 +49,26 @@ class EntityBuilder:
         self.components.clear()
 
         return entity.id
+
+
+    def build_entities_from_folder(self, folder_path, entity_names=[]) -> dict:
+
+        gen_entity_folder = Path.cwd() / folder_path
+
+        entities = {}
+        
+        stored_entities = entity_names if entity_names else os.listdir(gen_entity_folder)
+
+        for generated_entity in stored_entities:   
+            if generated_entity.endswith(".json"):
+                try:
+
+                    with open(folder_path + "/" + generated_entity, "r", encoding="utf-8") as file:
+                        entity_data = json.load(file)
+                
+                    entity_data = self.build_entity_from_dict(entity_data)
+                    entities[generated_entity] = entity_data
+                except Exception as e:
+                    print(f"Error loading {generated_entity}: {e}")
+
+        return entities

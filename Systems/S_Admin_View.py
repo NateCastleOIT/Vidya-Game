@@ -109,6 +109,32 @@ class LLMHUD(QWidget):
         response = self.llm.send_message(user_input)
         self.response_area.append(f"[LLM-{self.llm.active_role}]: {response}")
 
+class EntityLibraryExplorer(QWidget):
+    def __init__(self, c_registry, e_registry):
+        super().__init__()
+
+        self.setWindowTitle("Entity Library Explorer")
+        self.resize(600, 800)
+
+        # Scroll setup
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+
+        content = QFrame()
+        content_layout = QVBoxLayout()
+        content.setLayout(content_layout)
+
+        scroll.setWidget(content)
+
+        layout = QVBoxLayout()
+        layout.addWidget(scroll)
+        self.setLayout(layout)
+
+        # Render LLM HUD
+        llm_controller = LLMController()
+        llm_hud = LLMHUD(llm_controller)
+        content_layout.addWidget(llm_hud)
+
 class AdminView(QWidget):
     def __init__(self, c_registry, e_registry):
         super().__init__()

@@ -1,10 +1,13 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 import sys
+import asyncio
+import json
+import os
+from pathlib import Path
 
 from Utils import generate_directory_inits
 
 from Enums import EquipmentSlot
-import json
 
 from Systems import (AdminView,     # Systems.S_AdminView.AdminView
                     EntityRegistry, 
@@ -16,6 +19,7 @@ from Systems import (AdminView,     # Systems.S_AdminView.AdminView
                     entity_to_schema,
                     convert_keys_to_str,
                     all_components_to_schema,
+                    GameMaster,
 )
 
 # Need this to reference component types in the EntityBuilder
@@ -26,9 +30,8 @@ from Components import (
 def generate_inits():
     # Load all entities, components, systems
     generate_directory_inits()
-    
 
-if __name__ == "__main__":
+async def main() -> None:
     # Initialize game
     generate_inits()
 
@@ -124,13 +127,21 @@ if __name__ == "__main__":
     #entity_id = entity_builder.build_entity_from_dict(dict_of_entity)
     # entity_id = entity_builder.build_entity_from_dict(schema_of_entity) # returns a dict with types, not values for generating GPT Schema
 
-    with open("Lord.JSON", "r") as file:
-        entity_data = json.load(file)
+    # gamemaster = GameMaster()
+    # result = gamemaster.run_game_master()
+    # print("\n\n\n" + result)
+    
 
-    Thalanor = entity_builder.build_entity_from_dict(entity_data)
+    stored_entities = entity_builder.build_entities_from_folder(
+        "Generated Entities", 
+        entity_names=["Lord.json"],
+        )
 
     # Create a HUD instance
     admin_view = AdminView(component_registry, entity_registry)
     admin_view.show()
 
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+   asyncio.run(main())
